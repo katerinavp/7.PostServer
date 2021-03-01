@@ -32,8 +32,6 @@ fun Routing.v1() {
             call.respond(response)
         }
 
-
-
         get("/{id}/comment") {
             val id = call.parameters["id"]?.toLongOrNull() ?: throw ParameterConversionException("id", "Long")
             val model = repo.commentById(id) ?: throw NotFoundException()
@@ -46,7 +44,7 @@ fun Routing.v1() {
             val response = PostResponseDto.fromModel(model)
             call.respond(response)
         }
-        post {
+        post{
             val input = call.receive<PostRequestDto>()
             val model = PostModel(
                 id = input.id,
