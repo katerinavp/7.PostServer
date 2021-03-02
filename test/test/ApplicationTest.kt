@@ -54,9 +54,12 @@ class ApplicationTest {
                           "adv":"null",
                           "likes": 5,
                           "commentsCount": 10,
-                          "commentsByMe": true,
+                          "commentsByMe": false,
                           "sharedByMe": false,
-                          "sharedCount": 5
+                          "sharedCount": 5,
+                          "repostByMe": false,
+                          "repostCount": 0
+                       
                         }
                     """.trimIndent()
                 )

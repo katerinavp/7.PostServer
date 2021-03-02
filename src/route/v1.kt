@@ -25,26 +25,38 @@ fun Routing.v1() {
             val response = PostResponseDto.fromModel(model)
             call.respond(response)
         }
-        get("/{id}/like") {
+        post("/{id}/like") {
             val id = call.parameters["id"]?.toLongOrNull() ?: throw ParameterConversionException("id", "Long")
             val model = repo.likeById(id) ?: throw NotFoundException()
             val response = PostResponseDto.fromModel(model)
             call.respond(response)
         }
+        post("/{id}/dislike") {
+            val id = call.parameters["id"]?.toLongOrNull() ?: throw ParameterConversionException("id", "Long")
+            val model = repo.dislikeById(id) ?: throw NotFoundException()
+            val response = PostResponseDto.fromModel(model)
+            call.respond(response)
+        }
 
-        get("/{id}/comment") {
+        post("/{id}/comment") {
             val id = call.parameters["id"]?.toLongOrNull() ?: throw ParameterConversionException("id", "Long")
             val model = repo.commentById(id) ?: throw NotFoundException()
             val response = PostResponseDto.fromModel(model)
             call.respond(response)
         }
-        get("/{id}/share") {
+        post("/{id}/share") {
             val id = call.parameters["id"]?.toLongOrNull() ?: throw ParameterConversionException("id", "Long")
             val model = repo.shareById(id) ?: throw NotFoundException()
             val response = PostResponseDto.fromModel(model)
             call.respond(response)
         }
-        post{
+        post("/{id}/repost") {
+            val id = call.parameters["id"]?.toLongOrNull() ?: throw ParameterConversionException("id", "Long")
+            val model = repo.repostById(id) ?: throw NotFoundException()
+            val response = PostResponseDto.fromModel(model)
+            call.respond(response)
+        }
+        post {
             val input = call.receive<PostRequestDto>()
             val model = PostModel(
                 id = input.id,
@@ -70,5 +82,7 @@ fun Routing.v1() {
             val id = call.parameters["id"]?.toLongOrNull() ?: throw ParameterConversionException("id", "Long")
             repo.removeById(id)
         }
+
+
     }
 }
