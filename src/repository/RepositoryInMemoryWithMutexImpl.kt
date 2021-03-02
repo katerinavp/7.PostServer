@@ -73,8 +73,8 @@ class RepositoryInMemoryWithMutexImpl : PostRepository {
     override suspend fun shareById(id: Long): PostModel? =
         mutex.withLock {
             val index = items.indexOfFirst { it.id == id }
-            if (index < 0) {
-                return null
+            return if(index < 0) {
+                null
             } else {
                 val item= items[index]
 
@@ -82,8 +82,7 @@ class RepositoryInMemoryWithMutexImpl : PostRepository {
 
                 items[index] = copy
 
-                return copy
-
+                copy
             }
         }
 
@@ -91,13 +90,13 @@ class RepositoryInMemoryWithMutexImpl : PostRepository {
         mutex.withLock {
 
             val index = items.indexOfFirst { it.id == id }
-            if (index < 0) {
-                return null
+            return if (index < 0) {
+                null
             } else {
                 val item = items[index]
                 val copy = item.copy(commentsCount = item.commentsCount.inc(), commentsByMe = true)
                 items[index] = copy
-                return copy
+                copy
             }
 
         }
