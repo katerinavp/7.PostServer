@@ -15,7 +15,10 @@ apply plugin: 'application'
 group 'com.example'
 version '0.0.1'
 mainClassName = "io.ktor.server.netty.EngineMain"
-
+// Класс с которого стартуем
+application {
+    mainClassName = "сom.example.ApplicationKt"
+}
 sourceSets {
     main.kotlin.srcDirs = main.java.srcDirs = ['src']
     test.kotlin.srcDirs = test.java.srcDirs = ['test']
@@ -27,18 +30,24 @@ repositories {
     mavenLocal()
     jcenter()
 }
-def ktor_version = '1.2.4'
-def kodein_version = '6.3.3'
+def ktor_version = '1.5.2'
+//def kodein_version = '6.3.3'
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
-    implementation "io.ktor:ktor-server-cio:1.2.4"
-    implementation "io.ktor:ktor-gson:1.2.4"
+    implementation "io.ktor:ktor-server-cio:$ktor_version"//Coroutine-based I/O Движок заточеный для работы с корутинами. Пока только http/1.x
+    implementation "io.ktor:ktor-gson:$ktor_version"// Json конвертер
     implementation "ch.qos.logback:logback-classic:1.2.3"
     implementation 'org.kodein.di:kodein-di-generic-jvm:6.3.3'
     implementation 'org.kodein.di:kodein-di-framework-ktor-server-jvm:6.3.3'
-    testImplementation "io.ktor:ktor-server-tests:1.2.4"
+    testImplementation "io.ktor:ktor-server-tests:$ktor_version"
 }
+
+// Настройки компилятора
+
+sourceCompatibility = 1.8   // Указывается версия языка которая будет использоваться для компилирования
+targetCompatibility = 1.8   // На какой цлевой версии java будет исполнятся код
+
 compileKotlin {
     kotlinOptions.jvmTarget = "1.8"
 }
@@ -46,4 +55,5 @@ compileTestKotlin {
     kotlinOptions.jvmTarget = "1.8"
 }
 
+// Gradle задача. Все Gradle-задачи можно найти во вкладке Gradle справа
 task stage(dependsOn: installDist)
