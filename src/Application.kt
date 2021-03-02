@@ -1,7 +1,7 @@
 package com.example
 
 import com.example.repository.PostRepository
-import com.example.repository.RepositoryInMemory
+import com.example.repository.RepositoryInMemoryWithMutexImpl
 import com.example.route.v1
 import io.ktor.application.*
 import io.ktor.features.*
@@ -44,7 +44,7 @@ fun Application.module() {
 
     install(KodeinFeature) {
 
-        bind<PostRepository>() with singleton { RepositoryInMemory() }
+        bind<PostRepository>() with singleton { RepositoryInMemoryWithMutexImpl() }
     }
 
     install(Routing) {

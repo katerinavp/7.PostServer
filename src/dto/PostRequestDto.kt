@@ -3,7 +3,7 @@ package com.example.dto
 import com.example.model.PostType
 
 data class PostRequestDto( //запрос
-    val id: Long,
+    var id: Long,
     val author: String?,
     val content: String? = null,
     var type: PostType,

@@ -3,8 +3,8 @@ package com.example.dto
 import com.example.model.PostModel
 import com.example.model.PostType
 
-class PostResponseDto(
-    val id: Long,
+data class PostResponseDto(
+    var id: Long,
     val author: String?,
     val content: String? = null,
     var type: PostType,
