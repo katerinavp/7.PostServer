@@ -17,7 +17,7 @@ version '0.0.1'
 //mainClassName = "io.ktor.server.netty.EngineMain"
 // Класс с которого стартуем
 application {
-    mainClassName = "сom.example.ApplicationKt"
+    mainClassName = "com.example.ApplicationKt"
 }
 sourceSets {
     main.kotlin.srcDirs = main.java.srcDirs = ['src']
